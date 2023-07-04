@@ -1,0 +1,68 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block 'title' %}Telefones{% endblock %}
+
+
+{% block content %}
+ <br>
+ <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-16">
+        <form method="GET" action="{% url 'buscar_telefone' %}" class="row">
+          <div class="col-4 mb-4">
+            <input type="text" name="numero_telefone" class="form-control" placeholder="Número Tefone">
+          </div>
+          <div class="col-4 mb-4">
+            <input type="text" name="telefone_jovem" class="form-control" placeholder="Telefone Jovem">
+          </div>
+          <div class="col-4 mb-4">
+            <input type="text" name="telefone_responsavel" class="form-control" placeholder="Telefone Responsável">
+          </div>
+          <div class="col-4 mb-4">
+            <button type="submit" class="btn btn-primary btn-block">Buscar</button>
+          </div>
+        </form>
+        <div>
+            {% if lista_telefones %}
+                <table class="table table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Número Telefone</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Nome Jovem</th>
+                      <th scope="col">Idade Jovem</th>
+                      <th scope="col">Escolaridade</th>
+                      <th scope="col">Turno</th>
+                      <th scope="col">Telefone Jovem</th>
+                      <th scope="col">Nome Responsável</th>
+                      <th scope="col">Telefone Responsável</th>
+                      <th scope="col">#</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for telefone in lista_telefones %}
+                        <tr>
+                          <th scope="row">{{ telefone.numero_telefone }}</th>
+                          <td>{{ telefone.apelido|default:'' }}</td>
+                          <td>{{ telefone.nome_jovem|default:'' }}</td>
+                          <td>{{ telefone.idade_jovem|default:'' }}</td>
+                          <td>{{ telefone.escolaridade }}</td>
+                          <td>{{ telefone.turno }}</td>
+                          <td>{{ telefone.telefone_jovem|default:'' }}</td>
+                          <td>{{ telefone.nome_responsavel|default:'' }}</td>
+                          <td>{{ telefone.telefone_responsavel|default:'' }}</td>
+                          <td>
+                              <a href="{% url 'editar_telefone' telefone.id %}"><button class="btn btn-success btn-block">Editar</button></a>
+                              <a href="{% url 'deletar_telefone' telefone.id %}"><button class="btn btn-danger btn-block">Deletar</button></a>
+                          </td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+            {% else %}
+            {% endif %}
+         </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

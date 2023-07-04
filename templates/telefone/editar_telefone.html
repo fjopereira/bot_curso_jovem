@@ -1,0 +1,28 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block 'title' %}Cliente{% endblock %}
+
+
+{% block content %}
+    <br>
+    <div class="container">
+         <div class="row justify-content-center">
+            <h2>Editar Telefone</h2>
+            <form action="{% url 'editar_telefone' id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    {% for field in form.visible_fields %}
+                    <div class="form-group col-md-6">
+                        <label for="{{ field.id_for_label }}">{{field.label}}</label>
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success col-12" style="padding: top 5px;">Editar Telefone</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
