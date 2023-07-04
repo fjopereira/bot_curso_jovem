@@ -6,6 +6,5 @@ urlpatterns = [
     path('post_envio/', post_envio, name='post_envio'),
     path('post_entrada/', post_entrada, name='post_entrada'),
 
-
 ]
 
